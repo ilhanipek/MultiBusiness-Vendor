@@ -87,6 +87,7 @@ struct MainView: View {
     .navigationBarHidden(true)
     .navigationBarBackButtonHidden(true)
     .ignoresSafeArea(.all, edges: .bottom)
+    
   }
 }
 #Preview {

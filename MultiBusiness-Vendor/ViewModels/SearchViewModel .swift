@@ -11,8 +11,10 @@ class SearchViewModel : ObservableObject {
   
   @Published var vendors: Vendors?
   @Published var products: Products?
-
+  
+  @Published var selectedIndex = 0
   @Published var barPosition : BarPosition = .left
+  @Published var barOffset: CGFloat = -76
 
   let sC = ServiceController.shared
   static let shared = SearchViewModel()
@@ -26,11 +28,12 @@ class SearchViewModel : ObservableObject {
     }
   }
 
-
+  @MainActor
   func getSearchVendors() async throws {
     self.vendors = try await sC.getSearchVendors()
   }
-
+  
+  @MainActor
   func getProducts() async throws{
     self.products = try await sC.getProducts()
   }

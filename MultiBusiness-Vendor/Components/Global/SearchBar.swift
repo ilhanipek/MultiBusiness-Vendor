@@ -12,7 +12,7 @@ struct SearchBar: View {
   @State var placeholder: String = "Placeholder"
   @Binding var text: String
   @Binding var isSearching: Bool
-
+  var didCommit : (()->())?
     var body: some View {
         HStack {
           Image("search")
@@ -21,7 +21,9 @@ struct SearchBar: View {
               .frame(width: 20, height: 20)
               .padding(.leading,5)
 
-            TextField("Search", text: $text)
+          TextField("Search", text: $text,onCommit: {
+            didCommit?()
+          })
             .font(.customfont(.regular, fontSize: 17))
             .autocapitalization(.none)
             .disableAutocorrection(true)

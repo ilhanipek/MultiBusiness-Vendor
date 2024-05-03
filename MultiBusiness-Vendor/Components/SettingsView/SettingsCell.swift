@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct SettingsCell: View {
+  var image: String
+  var text: String
+  var didTap: (()->())?
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      Button {
+        didTap?()
+      } label: {
+        ZStack{
+          RoundedRectangle(cornerRadius: 5)
+            .stroke(lineWidth: 0.7)
+          .frame(width: Constants.screenWidth - 40, height: Constants.screenWidth / 8, alignment: .center)
+
+          HStack{
+            Image("\(image)")
+            Text("\(text)")
+            Spacer()
+            Image(systemName: "chevron.right")
+              .renderingMode(.template)
+              .foregroundStyle(Color.custom.primary)
+          }
+          .padding(.horizontal,Constants.screenWidth / 15)
+        }
+        .foregroundStyle(Color.black)
+      }
     }
 }
 
 #Preview {
-    SettingsCell()
+  SettingsCell(image: "", text: "sdflksdlfj", didTap: {
+    print("didtap")
+  })
 }

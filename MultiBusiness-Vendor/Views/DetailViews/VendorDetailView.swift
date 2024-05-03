@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct VendorDetailView: View {
+  var vendor : Vendor
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      ZStack {
+        Color.custom.background
+          .ignoresSafeArea()
+        VStack {
+            VendorDetailTopFillerView(text: "", isSearching: false, vendor: vendor) {
+              // On commit 
+            }
+            Spacer()
+        }
+      }
     }
 }
 
 #Preview {
-    VendorDetailView()
+  VendorDetailView(vendor: Vendor.vendors.first!)
 }

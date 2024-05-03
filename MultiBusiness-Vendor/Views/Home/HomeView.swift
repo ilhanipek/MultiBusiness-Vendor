@@ -17,71 +17,88 @@ struct HomeView: View {
 
   @StateObject var homeVM = HomeViewModel.shared
   @StateObject var mainVM = MainViewModel.shared
-  var body: some View {
-    ZStack{
-      Color.custom.background
-      VStack{
-        HomeTopFiller()
-          .padding(.bottom,10)
+  @StateObject var vendorTypeVM = VendorTypeViewModel.shared
 
-        ScrollView {
-          if let data = homeVM.banners?.data {
-            ScrollView(.horizontal) {
-              LazyHStack(content: {
-                ForEach(data,id: \.id ) { banner in
-                  BannerView(banner: banner)
-                }
-              })
-            }
-            .padding(.leading)
-          }
-          LazyVGrid(columns: gridItems, content: {
-            ForEach(homeVM.vendorTypes, id: \.id) { vendorType in
-              HomeViewPlatformCell(vendorType: vendorType)
-            }
-          })
-          // Coupons
-          if homeVM.coupons.count >= 1 {
-            VStack {
-              HStack {
-                Text("Promo")
-                  .font(.customfont(.medium, fontSize: Constants.screenWidth / 20))
-                  .padding(.leading)
-                Spacer()
-              }
+  @State var isPlatformPresented = false
+
+  var body: some View {
+    NavigationStack {
+      ZStack{
+        Color.custom.background
+        VStack{
+          HomeTopFiller()
+            .padding(.bottom,10)
+
+          ScrollView {
+
+            if let data = homeVM.banners?.data {
               ScrollView(.horizontal) {
                 LazyHStack(content: {
-                  ForEach(homeVM.coupons, id: \.id) { coupon in
-                    HomeViewCouponCell(coupon: coupon)
+                  ForEach(data,id: \.id ) { banner in
+                    BannerView(banner: banner)
                   }
                 })
               }
               .padding(.leading)
             }
+            LazyVGrid(columns: gridItems, content: {
+              ForEach(homeVM.vendorTypes, id: \.id) { vendorType in
+                HomeViewPlatformCell(vendorType: vendorType, isPlatformPresented: $isPlatformPresented, didTap: {
+                  vendorTypeVM.vendorType = vendorType
+                  isPlatformPresented = true
+                })
+              }
+            })
+            // Coupons
+            if homeVM.coupons.count >= 1 {
+              VStack {
+                HStack {
+                  Text("Promo")
+                    .font(.customfont(.medium, fontSize: Constants.screenWidth / 20))
+                    .padding(.leading)
+                  Spacer()
+                }
+                ScrollView(.horizontal) {
+                  LazyHStack(content: {
+                    ForEach(homeVM.coupons, id: \.id) { coupon in
+                      HomeViewCouponCell(coupon: coupon)
+                    }
+                  })
+                }
+                .padding(.leading)
+              }
+            }
+            // Promotions
+            HStack {
+              Text("Featured Vendors")
+                .font(.customfont(.medium, fontSize: Constants.screenWidth / 20))
+                .padding(.leading,10)
+              Spacer()
+            }
           }
-          // Promotions
-          HStack {
-            Text("Featured Vendors")
-              .font(.customfont(.medium, fontSize: Constants.screenWidth / 20))
-              .padding(.leading,10)
-            Spacer()
+          
+          Spacer()
+        }
+      }
+      .disabled(mainVM.isProgressing)
+      .overlay(alignment: .center) {
+        if mainVM.isProgressing == true{
+          ZStack {
+            Color.gray.opacity(0.7)
+            CustomProgressView(isAnimating: $mainVM.isProgressing)
           }
+          .ignoresSafeArea()
         }
-        Spacer()
       }
-    }
-    .overlay(alignment: .center) {
-      if mainVM.isProgressing == true{
-        ZStack {
-          Color.gray.opacity(0.7)
-          CustomProgressView(isAnimating: $mainVM.isProgressing)
-        }
-        .ignoresSafeArea()
-      }
+
+      .fullScreenCover(isPresented: $isPlatformPresented, onDismiss: {
+        isPlatformPresented = false
+      }, content: {
+        VendorTypeView()
+      })
     }
   }
 }
-
 
 #Preview {
     HomeView()

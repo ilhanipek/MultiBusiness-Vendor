@@ -16,11 +16,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+
 @main
 struct MultiBusiness_VendorApp: App {
   // register app delegate for Firebase setup
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+  
+  @StateObject var mainVM = MainViewModel.shared
   var body: some Scene {
     WindowGroup {
       NavigationStack {

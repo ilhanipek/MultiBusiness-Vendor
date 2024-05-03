@@ -18,7 +18,7 @@ struct Selectionbar: View {
 
       HStack(spacing: 5){
         Button("Vendors") {
-          selectedIndex = 0
+          searchVM.selectedIndex = 0
           searchVM.barPosition = .left
         leftBarAction?()
         }
@@ -30,7 +30,7 @@ struct Selectionbar: View {
             .foregroundStyle(searchVM.barPosition == .left ? Color.custom.primary : Color.white )
         }
         Button("Products") {
-          selectedIndex = 1
+          searchVM.selectedIndex = 1
           searchVM.barPosition = .middle
           middleBarAction?()
         }
@@ -42,7 +42,7 @@ struct Selectionbar: View {
             .foregroundStyle(searchVM.barPosition == .middle ? Color.custom.primary : Color.white )
         }
         Button("Services") {
-          selectedIndex = 2
+          searchVM.selectedIndex = 2
           searchVM.barPosition = .right
           rightBarAction?()
         }
@@ -55,15 +55,15 @@ struct Selectionbar: View {
         }
 
       }
-      .onChange(of: selectedIndex, perform: { value in
+      .onChange(of: searchVM.selectedIndex, perform: { value in
         withAnimation {
           switch value {
           case 0:
-            barOffset = -76
+            searchVM.barOffset = -76
           case 1:
-            barOffset = 0
+            searchVM.barOffset = 0
           case 2:
-            barOffset = 76
+            searchVM.barOffset = 76
           default:
             break
           }
@@ -76,7 +76,7 @@ struct Selectionbar: View {
           RoundedRectangle(cornerRadius: 10)
             .frame(width: Constants.screenWidth / 5.7, height: Constants.screenWidth / 80)
             .foregroundColor(.custom.primary)
-            .offset(x: barOffset, y: 0)
+            .offset(x: searchVM.barOffset, y: 0)
         )
     }
     

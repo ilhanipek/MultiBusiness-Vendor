@@ -7,28 +7,30 @@
 
 import Foundation
 
-struct Category: Codable {
-    let id: Int
-    let categoryId: Int?
-    let vendorType: VendorType
-    let name: String
-    let photo: String
-    let color: String
-    let hasSubcategories: Bool
+struct Categories: Codable {
+  let data: [Category]
+}
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case categoryId = "category_id"
-        case vendorType = "vendor_type"
-        case name
-        case photo
-        case color
-        case hasSubcategories = "has_subcategories"
-    }
+struct Category: Codable,Identifiable,Hashable {
+  let id: Int
+  let categoryID: String?
+  let vendorType: VendorType
+  let name: String
+  let photo: String
+  let color: String
+  let hasSubcategories: Bool
+
+  enum CodingKeys: String, CodingKey {
+    case id
+    case categoryID = "category_id"
+    case vendorType = "vendor_type"
+    case name, photo, color
+    case hasSubcategories = "has_subcategories"
+  }
 }
 
 extension Category {
   static let categories: [Category] = [
-    .init(id: 1, categoryId: nil, vendorType: VendorType.vendorTypes.first!, name: "Category1", photo: "\(Constants.bananaUrl)", color: "", hasSubcategories: false)
+    .init(id: 1, categoryID: nil, vendorType: VendorType.vendorTypes.first!, name: "Category1", photo: "\(Constants.bananaUrl)", color: "", hasSubcategories: false)
   ]
 }

@@ -27,10 +27,16 @@ struct SearchView: View {
       VStack{
         SearchTopFiller()
         HStack{
-          SearchBar(text: $text, isSearching: $isSearching)
+          SearchBar(text: $text, isSearching: $isSearching) {
+            DispatchQueue.main.async{
+              print("dsfsdfsfsdfdsfsdfssdfdsfsdf")
+              text = ""
+              isSearching = false
+            }
+          }
             .padding(.leading,5)
           Button(action: {
-
+            
           }, label: {
             ZStack{
               RoundedRectangle(cornerRadius: 10)
@@ -45,7 +51,7 @@ struct SearchView: View {
             .padding(.horizontal,5)
           })
         }
-
+        
         HStack{
           Selectionbar(leftBarAction: {
             mainVM.isProgressing = true
@@ -77,6 +83,7 @@ struct SearchView: View {
           .padding(.leading,5)
           Spacer()
         }
+
         ZStack {
           if searchVM.barPosition == .left {
             if let data = searchVM.vendors {
@@ -94,7 +101,12 @@ struct SearchView: View {
               ScrollView {
                 LazyVGrid(columns: gridItems,spacing: 5, content: {
                   ForEach(data.data,id: \.id) { product in
-                    SearchViewProductCell(product: product)
+                    NavigationLink {
+                      ProductDetailView(product: product)
+                    } label: {
+                      SearchViewProductCell(product: product)
+                        .tint(Color.black )
+                    }
                   }
                 })
               }

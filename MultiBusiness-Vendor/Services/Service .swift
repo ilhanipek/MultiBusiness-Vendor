@@ -203,7 +203,6 @@ extension Endpoint: EndpointProtocol {
       fatalError("URL HATASI")
     }
     
-    print(url)
     var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
 
@@ -262,7 +261,6 @@ extension Endpoint: EndpointProtocol {
     case .myWalletAddress: return ""
     case .walletAddressesSearch: return ""
     case .walletTransfer: return ""
-
     }
   }
 }

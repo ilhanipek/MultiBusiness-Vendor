@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class PlatformCellViewModel: ObservableObject {
+
+  @Published var vendorType: VendorType
+
+  init(vendorType: VendorType) {
+    self.vendorType = vendorType
+  }
+}

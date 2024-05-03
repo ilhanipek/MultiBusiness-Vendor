@@ -23,11 +23,9 @@ struct SearchViewVendorCell: View {
         VStack {
           ZStack{
             HStack{
-
               WebImage(url: URL(string: "\(vendor.featureImage)"))
                 .resizable()
             }
-            
             HStack{
               VStack(spacing: 5){
                 Spacer()
@@ -39,13 +37,12 @@ struct SearchViewVendorCell: View {
                     Text("\(deliveryTime) min")
                   }
                   .font(.customfont(.regular, fontSize: Constants.screenWidth / 30))
-                  .padding(.horizontal,vendor.prepareTime == nil ? 0 : 2.5)
+                  .padding(.horizontal,2.5)
                   .background{
                     RoundedRectangle(cornerRadius: 10)
                       .foregroundStyle(Color.custom.darkGray.opacity(0.4))
                   }
                   .padding(EdgeInsets(top: Constants.screenWidth / 30, leading: Constants.screenWidth / 45, bottom: 0, trailing: 0))
-
                 }
 
                 if let prepareTime = vendor.prepareTime {
@@ -53,6 +50,7 @@ struct SearchViewVendorCell: View {
                     Image("prepare_time")
                       .resizable()
                       .aspectRatio(contentMode: .fit)
+
                     Text("\(prepareTime) min")
                   }
                   .font(.customfont(.regular, fontSize: Constants.screenWidth / 30))

@@ -33,6 +33,7 @@ struct TabButton: View {
 
             }
         }
+        .symbolRenderingMode(.multicolor)
         .foregroundColor(isSelect ? Color.custom.primary : .primaryText )
         .frame(minWidth: 0, maxWidth: .infinity)
     }

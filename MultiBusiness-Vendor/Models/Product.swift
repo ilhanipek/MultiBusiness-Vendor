@@ -12,15 +12,17 @@ struct Products: Codable {
 }
 
 struct Product: Codable {
-  
   let id: Int
   let name, sku, barcode, description: String
-  let price: String
-  let discountPrice, capacity, unit: String
-  let packageCount, availableQty, featured, deliverable: String
-  let isActive, plusOption, digital: String
+  let price, discountPrice: String
+  let capacity: String?
+  let unit: String
+  let packageCount, availableQty: String?
+  let featured, deliverable, isActive, plusOption: String
+  let digital: String
   let ageRestricted: Bool
-  let vendorID, inOrder, createdAt, updatedAt: String
+  let vendorID, inOrder, approved, createdAt: String
+  let updatedAt: String
   let deletedAt: String?
   let reviewsCount, formattedDate, sellPrice: String
   let photo: String
@@ -28,10 +30,10 @@ struct Product: Codable {
   let rating: Int
   let optionGroups: [String]
   let photos: [String]
-  let digitalFiles: [String]?
+  let digitalFiles: [String]
   let token: String
   let vendor: Vendor
-  let tags: [Tag]
+  let tags: [String]
 
   enum CodingKeys: String, CodingKey {
       case id, name, sku, barcode, description, price
@@ -46,6 +48,7 @@ struct Product: Codable {
       case ageRestricted = "age_restricted"
       case vendorID = "vendor_id"
       case inOrder = "in_order"
+      case approved
       case createdAt = "created_at"
       case updatedAt = "updated_at"
       case deletedAt = "deleted_at"
@@ -64,6 +67,6 @@ struct Product: Codable {
 
 extension Product {
   static let products: [Product] = [
-    .init(id: 1, name: "Product1", sku: "0", barcode: "101010100101010", description: "I'm good", price: "500", discountPrice: "450", capacity: "15", unit: "kg", packageCount: "", availableQty: "500", featured: "1", deliverable: "1", isActive: "1", plusOption: "0", digital: "0", ageRestricted: false, vendorID: "", inOrder: "", createdAt: "", updatedAt: "", deletedAt: "", reviewsCount: "80", formattedDate: "", sellPrice: "", photo: "\(Constants.bananaUrl)", isFavourite: true, rating: 33, optionGroups: ["",""], photos: ["\(Constants.bananaUrl)","\(Constants.bananaUrl)"], digitalFiles: nil, token: "", vendor: Vendor.vendors.first!, tags: Tag.tags)
+    .init(id: 1, name: "Banana", sku: "", barcode: "", description: "This is banana. Banana is good. Monkey likes banana. Monkey loves banana. Banana is monkeys precious. ", price: "100", discountPrice: "90", capacity: "", unit: "", packageCount: "", availableQty: "", featured: "", deliverable: "", isActive: "", plusOption: "", digital: "", ageRestricted: true, vendorID: "", inOrder: "", approved: "", createdAt: "", updatedAt: "", deletedAt: "", reviewsCount: "", formattedDate: "", sellPrice: "", photo: "\(Constants.bananaUrl)", isFavourite: true, rating: 1, optionGroups: ["",""], photos: ["",""], digitalFiles: ["",""], token: "", vendor: Vendor.vendors.first!, tags: ["",""])
   ]
 }

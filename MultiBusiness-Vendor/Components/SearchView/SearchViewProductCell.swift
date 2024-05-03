@@ -50,7 +50,7 @@ struct SearchViewProductCell: View {
                     .offset(y: 0.5)
                 )
             }
-            if let tag = product.tags.first?.name{
+            if let tag = product.tags.first{
               Text(tag)
                 .font(.customfont(.regular, fontSize: Constants.screenWidth / 22))
                 .lineLimit(1)

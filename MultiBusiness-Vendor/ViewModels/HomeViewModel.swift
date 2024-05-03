@@ -8,7 +8,7 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-  
+
   @Published var vendorTypes : [VendorType] = []
   @Published var coupons: [Coupon] = []
   @Published var bestVendors: [Vendor] = []
@@ -21,7 +21,7 @@ class HomeViewModel: ObservableObject {
   init() {
     mainVM.isProgressing = true
     Task{
-      try await getBanners()
+      //try await getBanners()
       try await getVendorTypes()
       try await getCoupons()
       //try await getBestVendors()
@@ -32,7 +32,6 @@ class HomeViewModel: ObservableObject {
   @MainActor
   func getVendorTypes() async throws {
     self.vendorTypes = try await sC.getVendorTypes()
-    print(self.vendorTypes)
   }
   
   @MainActor

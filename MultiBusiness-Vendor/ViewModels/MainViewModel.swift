@@ -21,7 +21,7 @@ class MainViewModel: ObservableObject {
   @Published var currentUser: User?
 
   // Bottom Tab Bar
-  @Published var selectTab: Int = 1
+  @Published var selectTab: Int = 0
 
   // Location
   @Published var locationText: String = ""
