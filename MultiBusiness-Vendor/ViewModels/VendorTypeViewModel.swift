@@ -20,13 +20,8 @@ class VendorTypeViewModel: ObservableObject {
   let mainVM = MainViewModel.shared
 
   static let shared = VendorTypeViewModel()
-
-  init(){
-    Task{
-      try await getCategories()
-    }
-  }
-
+  
+  @MainActor
   func getCategories() async throws{
     self.categories?.removeAll()
     let categories = try await sC.getCategories()
@@ -35,11 +30,15 @@ class VendorTypeViewModel: ObservableObject {
 
   func getProductsByVendorType() async throws{
     let products = try await sC.getProducts()
+
     self.products = products.data
   }
-
+  
+  @MainActor
   func getVendors() async throws {
+    self.vendors?.removeAll()
     let vendors = try await sC.getVendors()
     self.vendors = vendors.data.filter({$0.vendorType == vendorType})
+    print(self.vendors)
   }
 }

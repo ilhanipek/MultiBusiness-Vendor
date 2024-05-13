@@ -10,8 +10,7 @@ import SwiftUI
 
 struct SearchBar: View {
   @State var placeholder: String = "Placeholder"
-  @Binding var text: String
-  @Binding var isSearching: Bool
+  @StateObject var searchVM = SearchViewModel.shared
   var didCommit : (()->())?
     var body: some View {
         HStack {
@@ -21,7 +20,8 @@ struct SearchBar: View {
               .frame(width: 20, height: 20)
               .padding(.leading,5)
 
-          TextField("Search", text: $text,onCommit: {
+          TextField("Search", text: $searchVM.searchText,onCommit: {
+            searchVM.filtredVendors?.removeAll()
             didCommit?()
           })
             .font(.customfont(.regular, fontSize: 17))
@@ -30,15 +30,18 @@ struct SearchBar: View {
             .frame(minWidth: 0, maxWidth: Constants.screenWidth - 40)
                 .onTapGesture {
                   withAnimation(.spring) {
-                    isSearching = true
+                    searchVM.isSearching = true
+                    searchVM.filtredVendors?.removeAll()
+                    searchVM.isSearched = true
                   }
                 }
 
-            if isSearching {
+            if searchVM.isSearching {
                 Button(action: {
-                    text = ""
+                  searchVM.searchText = ""
+                  searchVM.filtredVendors = searchVM.vendors?.data
                   withAnimation(.spring) {
-                    isSearching = false
+                    searchVM.isSearching = false
                   }
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
@@ -52,9 +55,12 @@ struct SearchBar: View {
         .padding(.vertical,10)
         .background(Color.white)
         .cornerRadius(12)
+        .onTapGesture {
+          searchVM.searchText = ""
+        }
     }
 }
 
 #Preview {
-  SearchBar(text: .constant(""), isSearching: .constant(false))
+  SearchBar()
 }

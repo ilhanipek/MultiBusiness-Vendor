@@ -20,7 +20,7 @@ class FireBaseAuthService {
       try? await loadCurrentUserData()
     }
   }
-
+  
   func login(email: String, password: String) async throws{
     do {
       let result = try await Auth.auth().signIn(withEmail: email, password: password)

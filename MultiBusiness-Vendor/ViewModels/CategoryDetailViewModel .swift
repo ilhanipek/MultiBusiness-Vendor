@@ -7,12 +7,26 @@
 
 import SwiftUI
 
-struct CategoryDetailViewModel_: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+class CategoryDetailViewModel: ObservableObject {
+  
+  @Published var vendors: Vendors?
+  @Published var products: Products?
 
-#Preview {
-    CategoryDetailViewModel_()
+  let sC = ServiceController.shared
+  init() {
+
+    Task {
+      
+    }
+  }
+
+  @MainActor
+  func getVendors() async throws {
+    var vendors : Vendors
+    vendors = try await sC.getVendors()
+    vendors.data.forEach { vendor in
+      
+    }
+  }
+
 }

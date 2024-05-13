@@ -14,7 +14,7 @@ struct CartTopFiller: View {
         .foregroundStyle(Color.custom.primary)
         .ignoresSafeArea()
         Text("Cart")
-          .font(.customfont(.regular, fontSize: Constants.screenHeight / 45))
+          .font(.customfont(.regular, fontSize: Constants.screenHeight / 30))
           .foregroundStyle(Color.white)
 
       }

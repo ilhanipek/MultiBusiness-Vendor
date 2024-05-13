@@ -15,12 +15,12 @@ struct BannerView: View {
     ZStack {
       RoundedRectangle(cornerRadius: 8)
         .stroke(lineWidth: 0.1)
-        .frame(width: Constants.screenWidth/1.7, height: Constants.screenWidth / 4, alignment: .center)
+        .frame(width: Constants.screenWidth / 2.5, height: Constants.screenWidth / 5, alignment: .center)
 
       WebImage(url: URL(string: banner.photo))
           .resizable()
           .clipShape(RoundedRectangle(cornerRadius: 8))
-          .frame(width: Constants.screenWidth/1.7, height: Constants.screenWidth / 4, alignment: .center)
+          .frame(width: Constants.screenWidth/2.5, height: Constants.screenWidth / 5, alignment: .center)
     }
   }
 }

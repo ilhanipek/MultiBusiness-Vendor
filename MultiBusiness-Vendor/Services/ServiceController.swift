@@ -49,14 +49,6 @@ final class ServiceController: ObservableObject {
     return banners
   }
 
-  func getSearchVendors() async throws -> Vendors {
-    var vendors: Vendors
-    let endPoint = Endpoint.vendors
-
-    vendors = try await dataNetworkManager.request(endPoint)
-    return vendors
-  }
-
   func getProducts() async throws -> Products {
     var products: Products
     let endPoint = Endpoint.products

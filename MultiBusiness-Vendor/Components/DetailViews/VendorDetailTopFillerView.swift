@@ -24,6 +24,8 @@ struct VendorDetailTopFillerView: View {
               mode.wrappedValue.dismiss()
             } label: {
               Image(systemName: "chevron.left")
+                .resizable()
+                .frame(width: 15, height: 19, alignment: .center)
                 .foregroundStyle(Color.custom.background)
                 .padding(.leading)
             }
@@ -35,7 +37,7 @@ struct VendorDetailTopFillerView: View {
             Spacer()
           }
           .padding(.top)
-          SearchBar(placeholder: "Search in banana store", text: $text, isSearching: $isSearching) {
+          SearchBar(placeholder: "Search in banana store") {
             didCommit?()
           }
           .padding(.bottom)

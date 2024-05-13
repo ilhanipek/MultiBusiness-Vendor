@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
   @State var text : String = ""
   @State var isSearching : Bool = false
@@ -25,22 +26,29 @@ struct HomeView: View {
     NavigationStack {
       ZStack{
         Color.custom.background
+          .ignoresSafeArea()
         VStack{
           HomeTopFiller()
             .padding(.bottom,10)
-
-          ScrollView {
-
+          
+          ScrollView(showsIndicators: false) {
             if let data = homeVM.banners?.data {
-              ScrollView(.horizontal) {
+              ScrollView(.horizontal,showsIndicators: false ) {
                 LazyHStack(content: {
                   ForEach(data,id: \.id ) { banner in
-                    BannerView(banner: banner)
+                    Button {
+                        if let url = URL(string: banner.link) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        BannerView(banner: banner)
+                    }
                   }
                 })
               }
               .padding(.leading)
             }
+
             LazyVGrid(columns: gridItems, content: {
               ForEach(homeVM.vendorTypes, id: \.id) { vendorType in
                 HomeViewPlatformCell(vendorType: vendorType, isPlatformPresented: $isPlatformPresented, didTap: {
@@ -58,25 +66,22 @@ struct HomeView: View {
                     .padding(.leading)
                   Spacer()
                 }
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal,showsIndicators: false) {
                   LazyHStack(content: {
                     ForEach(homeVM.coupons, id: \.id) { coupon in
-                      HomeViewCouponCell(coupon: coupon)
+                      NavigationLink {
+                        CouponDetailView(coupon: coupon)
+                      } label: {
+                        HomeViewCouponCell(coupon: coupon)
+                          .tint(.black)
+                      }
                     }
                   })
                 }
                 .padding(.leading)
               }
             }
-            // Promotions
-            HStack {
-              Text("Featured Vendors")
-                .font(.customfont(.medium, fontSize: Constants.screenWidth / 20))
-                .padding(.leading,10)
-              Spacer()
-            }
           }
-          
           Spacer()
         }
       }
@@ -90,7 +95,6 @@ struct HomeView: View {
           .ignoresSafeArea()
         }
       }
-
       .fullScreenCover(isPresented: $isPlatformPresented, onDismiss: {
         isPlatformPresented = false
       }, content: {

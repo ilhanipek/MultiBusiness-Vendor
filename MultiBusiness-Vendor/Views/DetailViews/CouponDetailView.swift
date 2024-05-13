@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct CouponDetailView: View {
+  var coupon: Coupon
+  @State var text: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      ZStack {
+        Color.custom.background
+          .ignoresSafeArea()
+        VStack(alignment: .center) {
+          CouponTopFiller(coupon: coupon)
+          VStack {
+            Text("Coupon can be use with most products without")
+            Text("restrictions")
+          }
+          .font(.customfont(.regular, fontSize: Constants.screenWidth / 22))
+          .bold()
+          .frame(width: Constants.screenWidth - 10, alignment: .center)
+          Spacer()
+        }
+      }
+      .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    CouponDetailView()
+  CouponDetailView(coupon: Coupon.coupons.first!)
 }

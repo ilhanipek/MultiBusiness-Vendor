@@ -34,7 +34,10 @@ struct SearchViewVendorCell: View {
                     Image("delivery_car")
                       .resizable()
                       .aspectRatio(contentMode: .fit)
+                      .symbolRenderingMode(.multicolor)
+                      .foregroundStyle(Color.white)
                     Text("\(deliveryTime) min")
+                      .foregroundStyle(Color.white)
                   }
                   .font(.customfont(.regular, fontSize: Constants.screenWidth / 30))
                   .padding(.horizontal,2.5)
@@ -52,6 +55,7 @@ struct SearchViewVendorCell: View {
                       .aspectRatio(contentMode: .fit)
 
                     Text("\(prepareTime) min")
+                      .foregroundStyle(Color.white)
                   }
                   .font(.customfont(.regular, fontSize: Constants.screenWidth / 30))
                   .padding(.horizontal,vendor.prepareTime == nil ? 0 : 2.5)

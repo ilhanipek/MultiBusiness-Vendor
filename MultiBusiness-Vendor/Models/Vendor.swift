@@ -4,7 +4,7 @@
 import Foundation
 
 struct Vendors: Codable {
-  let data: [Vendor]
+  var data: [Vendor]
 }
 
 struct Vendor: Codable {
@@ -37,6 +37,7 @@ struct Vendor: Codable {
   let vendorType: VendorType
   let fees, days: [String]
 
+  
   enum CodingKeys: String, CodingKey {
       case id, name, description
       case baseDeliveryFee = "base_delivery_fee"
@@ -81,6 +82,6 @@ struct Vendor: Codable {
 
 extension Vendor {
     static let vendors: [Vendor] = [
-      .init(id: 1, name: "Banana Store", description: "", baseDeliveryFee: 1, deliveryFee: 1, deliveryRange: 1, tax: "", phone: "", email: "", address: "", latitude: "", longitude: "", commission: 1, pickup: 1, delivery: 1, isActive: 1, chargePerKM: 1, isOpen: true, vendorTypeID: 1, autoAssignment: "", autoAccept: "", allowScheduleOrder: true, hasSubCategories: true, minOrder: "", maxOrder: "", useSubscription: true, hasDrivers: "", prepareTime: "", deliveryTime: "", inOrder: "", featured: "", createdAt: "", updatedAt: "", deletedAt: "", creatorID: "", reviewsCount: 1, formattedDate: "", logo: "\(Constants.bananaUrl)", featureImage: "", rating: 1, canRate: true, slots: ["",""], isPackageVendor: 1, hasSubscription: true, documentRequested: true, pendingDocumentApproval: true, vendorType: VendorType.vendorTypes.first!, fees: ["",""], days: ["",""])
+      .init(id: 1, name: "Banana Store", description: "This is banana. Banana is good. Monkey likes banana. Monkey loves banana. Banana is monkeys precious. ", baseDeliveryFee: 1, deliveryFee: 1, deliveryRange: 1, tax: "", phone: "", email: "", address: "", latitude: "", longitude: "", commission: 1, pickup: 1, delivery: 1, isActive: 1, chargePerKM: 1, isOpen: true, vendorTypeID: 1, autoAssignment: "", autoAccept: "", allowScheduleOrder: true, hasSubCategories: true, minOrder: "", maxOrder: "", useSubscription: true, hasDrivers: "", prepareTime: "20-30", deliveryTime: "30-40", inOrder: "", featured: "", createdAt: "", updatedAt: "", deletedAt: "", creatorID: "", reviewsCount: 1, formattedDate: "", logo: "\(Constants.bananaUrl)", featureImage: "", rating: 1, canRate: true, slots: ["",""], isPackageVendor: 1, hasSubscription: true, documentRequested: true, pendingDocumentApproval: true, vendorType: VendorType.vendorTypes.first!, fees: ["",""], days: ["",""])
     ]
 }

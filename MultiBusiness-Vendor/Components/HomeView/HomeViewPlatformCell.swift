@@ -29,7 +29,7 @@ struct HomeViewPlatformCell: View {
           .foregroundColor(.black)
       }
       .padding()
-      .background(Color.gray.opacity(0.7))
+      .background(Color(uiColor: UIColor(hex: vendorType.color)!))
       .cornerRadius(10)
       .overlay(
         RoundedRectangle(cornerRadius: 10)

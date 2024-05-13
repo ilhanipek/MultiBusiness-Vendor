@@ -23,6 +23,7 @@ struct MultiBusiness_VendorApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
   
   @StateObject var mainVM = MainViewModel.shared
+  @Environment(\.presentationMode) var presentationMode
   var body: some Scene {
     WindowGroup {
       NavigationStack {

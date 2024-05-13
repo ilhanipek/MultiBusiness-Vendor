@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
   
   @StateObject var mainVM = MainViewModel.shared
+  @Environment(\.presentationMode) var presentationMode
   let user: User
   
   var body: some View {
@@ -41,6 +42,7 @@ struct MainView: View {
               withAnimation {
                 mainVM.selectTab = 0
               }
+              presentationMode.wrappedValue.dismiss()
             }
           }
 

@@ -19,7 +19,7 @@ struct HomeViewCouponCell: View {
                 .transition(.fade(duration: 0.5))
                 .scaledToFit()
                 .frame(width: 70, height: 70)
-
+          
           VStack(alignment: .leading){
             Text(coupon.code)
               .font(.customfont(.bold, fontSize: Constants.screenWidth/22))
@@ -39,3 +39,4 @@ struct HomeViewCouponCell: View {
 #Preview {
   HomeViewCouponCell(coupon: Coupon(id: 1, code: "COUPON", color: "#e32400", description: "sdlkfmlskdjflskdfjslf", discount: "", minOrderAmount: "", maxCouponAmount: "", percentage: "", expiresOn: "", times: "", isActive: "", forDelivery: false, creatorID: "", vendorTypeID: "", createdAt: "", updatedAt: "", deletedAt: "", formattedExpiresOn: "", useLeft: 100, expired: false, photo: "\(Constants.bananaUrl)"))
 }
+

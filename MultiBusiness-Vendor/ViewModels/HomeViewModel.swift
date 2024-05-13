@@ -21,7 +21,7 @@ class HomeViewModel: ObservableObject {
   init() {
     mainVM.isProgressing = true
     Task{
-      //try await getBanners()
+      try await getBanners()
       try await getVendorTypes()
       try await getCoupons()
       //try await getBestVendors()

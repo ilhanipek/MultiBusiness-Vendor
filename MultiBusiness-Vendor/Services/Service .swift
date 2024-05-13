@@ -225,7 +225,7 @@ extension Endpoint: EndpointProtocol {
   var baseURL: String {
     return "http://mecomkou.com/api"
   }
-
+  
   var path: String {
     switch self {
     case .banners: return "/banners"
@@ -255,12 +255,12 @@ extension Endpoint: EndpointProtocol {
     case .generalOrderSummary: return ""
     case .chat: return ""
     case .rating: return ""
-    case .walletBalance: return ""
-    case .walletTopUp: return ""
-    case .walletTransactions: return ""
-    case .myWalletAddress: return ""
-    case .walletAddressesSearch: return ""
-    case .walletTransfer: return ""
+    case .walletBalance: return "/wallet/balance"
+    case .walletTopUp: return "/wallet/topup"
+    case .walletTransactions: return "/wallet/transactions"
+    case .myWalletAddress: return "/wallet/my/address"
+    case .walletAddressesSearch: return "/wallet/address/search"
+    case .walletTransfer: return "/wallet/address/transfer"
     }
   }
 }

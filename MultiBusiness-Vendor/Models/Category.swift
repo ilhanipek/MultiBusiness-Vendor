@@ -19,7 +19,7 @@ struct Category: Codable,Identifiable,Hashable {
   let photo: String
   let color: String
   let hasSubcategories: Bool
-
+  
   enum CodingKeys: String, CodingKey {
     case id
     case categoryID = "category_id"
